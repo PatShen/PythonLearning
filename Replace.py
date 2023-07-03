@@ -5,6 +5,7 @@ import re
 folder_path = "path_of_file"
 allowed_extensions = (".h", ".m", ".swift", ".xcconfig")
 pattern = r"(?m)((?:Copyright \(c\)|©) \d{4} )(.*?)( All rights reserved\.)"
+excluded_folders = ["Pods"]
 
 def replace_callback(match):
     start = match.group(1)
@@ -18,6 +19,9 @@ def replace_callback(match):
 
 #遍历文件夹中的文件
 for root, dirs, files in os.walk(folder_path):
+	# 排除指定的子文件夹
+    dirs[:] = [d for d in dirs if d not in excluded_folders]
+    
     for file in files:
         # 检查文件扩展名
         if file.endswith(allowed_extensions):
