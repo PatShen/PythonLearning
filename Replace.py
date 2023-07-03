@@ -12,12 +12,12 @@ def replace_callback(match):
     content = match.group(2)
     end = match.group(3)
 
-    # 替换以 "AXX" 开头，以任意字符结尾的字符串为 "BXX."
+    # 替换以 "AXX" 开头，以任意字符结尾的字符串为 "BXX."， 不区分大小写
     replaced_content = re.sub(r"^AXX(.*?)\.$", r"BXX.", content, flags=re.IGNORECASE | re.MULTILINE)
 
     return start + replaced_content + end
 
-#遍历文件夹中的文件
+# 遍历文件夹中的文件
 for root, dirs, files in os.walk(folder_path):
 	# 排除指定的子文件夹
     dirs[:] = [d for d in dirs if d not in excluded_folders]
