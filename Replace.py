@@ -3,7 +3,7 @@ import os
 import re
 
 folder_path = "path_of_file"
-allowed_extensions = (".h", ".m", ".swift")
+allowed_extensions = (".h", ".m", ".swift", ".xcconfig")
 pattern = r"(?m)((?:Copyright \(c\)|©) \d{4} )(.*?)( All rights reserved\.)"
 
 def replace_callback(match):
@@ -12,7 +12,7 @@ def replace_callback(match):
     end = match.group(3)
 
     # 替换以 "AXX" 开头，以任意字符结尾的字符串为 "BXX."
-    replaced_content = re.sub(r"^AXX(.*?)\.$", r"BXX.", content, flags=re.MULTILINE)
+    replaced_content = re.sub(r"^AXX(.*?)\.$", r"BXX.", content, flags=re.IGNORECASE | re.MULTILINE)
 
     return start + replaced_content + end
 
